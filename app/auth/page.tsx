@@ -2,26 +2,35 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("Logging in...");
+    router.push("/dashboard");
+  };
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-[#F8F9FA] px-4">
+      <title>Login | Aldo Dashboard</title>
       <div className="w-full max-w-[440px] rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
         <div className="mb-8 text-center">
           <h1 className="mb-2 text-2xl font-bold text-gray-900">Welcome Back!</h1>
           <p className="text-sm text-gray-500">To login, enter your email address</p>
         </div>
 
-        <form className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2">
             <label
               htmlFor="email"

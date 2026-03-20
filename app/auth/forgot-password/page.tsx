@@ -2,19 +2,23 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Mail, ArrowLeft } from "lucide-react";
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
+  const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Handle reset password logic
     console.log("Reset password for:", email);
+    router.push("/auth/verify-code");
   };
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-[#F8F9FA] px-4">
+      <title>Forgot Password | Aldo Dashboard</title>
       <div className="w-full max-w-[440px] rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
         <div className="mb-8 text-center">
           <h1 className="mb-2 text-2xl font-bold text-gray-900">Forgot Password</h1>
