@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Header from "@/components/layout/Header";
+import Link from "next/link";
 import {
   Search,
   CheckCircle2,
@@ -165,9 +166,12 @@ export default function SupportPage() {
                     </td>
                     <td className="px-6 py-4 font-medium text-gray-500">{ticket.date}</td>
                     <td className="px-6 py-4 text-right">
-                      <button className="rounded-lg border border-[#FF8C42] px-4 py-1.5 text-xs font-bold text-[#FF8C42] transition-all hover:bg-[#FF8C42] hover:text-white">
+                      <Link 
+                        href={`/dashboard/support/${ticket.id === "JD" ? "8429" : ticket.id}`}
+                        className="inline-block rounded-lg border border-[#FF8C42] px-4 py-1.5 text-xs font-bold text-[#FF8C42] transition-all hover:bg-[#FF8C42] hover:text-white"
+                      >
                         View Ticket
-                      </button>
+                      </Link>
                     </td>
                   </tr>
                 ))}

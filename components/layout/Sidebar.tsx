@@ -20,7 +20,7 @@ const navItems = [
   { name: "Subscriptions", href: "/dashboard/subscriptions", icon: CreditCard },
   { name: "Analytics", href: "/dashboard/analytics", icon: BarChart2 },
   { name: "Support", href: "/dashboard/support", icon: LifeBuoy },
-  { name: "Settings", href: "#", icon: Settings },
+  { name: "Settings", href: "/dashboard/settings", icon: Settings },
 ];
 
 export default function Sidebar() {

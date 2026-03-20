@@ -280,7 +280,7 @@ export default function AnalyticsPage() {
             </div>
             <div className="flex flex-col sm:flex-row items-center justify-between gap-8">
               <div className="relative w-48 h-48">
-                <ResponsiveContainer width="100%" height="100%">
+                <ResponsiveContainer width="100%" height={192}>
                   <PieChart>
                     <Pie
                       data={subscriptionStatusData}
@@ -326,7 +326,7 @@ export default function AnalyticsPage() {
             <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-6">Billing Cycle</h3>
             <div className="flex flex-col items-center">
               <div className="relative w-48 h-48 mb-8">
-                <ResponsiveContainer width="100%" height="100%">
+                <ResponsiveContainer width="100%" height={192}>
                   <PieChart>
                     <Pie
                       data={billingCycleData}
