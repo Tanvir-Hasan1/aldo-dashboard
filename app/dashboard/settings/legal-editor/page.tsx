@@ -1,14 +1,17 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "@/components/layout/Header";
 import { useSearchParams } from "next/navigation";
+import { useEditor, EditorContent } from '@tiptap/react';
+import StarterKit from '@tiptap/starter-kit';
+import Underline from '@tiptap/extension-underline';
 import {
   Clock,
   Bold,
   Italic,
   Underline as UnderlineIcon,
-  List,
+  List as ListIcon,
   ListOrdered,
   Save
 } from "lucide-react";
@@ -18,57 +21,28 @@ export default function LegalEditorPage() {
   const initialTab = searchParams?.get("tab") === "privacy" ? "privacy" : "terms";
   const [activeTab, setActiveTab] = useState(initialTab);
 
-  const [content, setContent] = useState("");
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const editor = useEditor({
+    extensions: [
+      StarterKit,
+      Underline,
+    ],
+    content: '',
+    immediatelyRender: false,
+  });
 
   useEffect(() => {
+    if (!editor) return;
+    
     if (activeTab === "terms") {
-      setContent(`# Terms of Service\n\n## 1. Acceptance of Terms\nBy accessing and using our platform, you agree to be bound by these Terms of Service and all applicable laws and regulations.`);
+      editor.commands.setContent(`<h1>Terms of Service</h1><h2>1. Acceptance of Terms</h2><p>By accessing and using our platform, you agree to be bound by these Terms of Service and all applicable laws and regulations.</p>`);
     } else {
-      setContent(`# Privacy Policy\n\n## 1. Information Collection\nWe collect personal information that you provide to us directly, such as when you create an account.`);
+      editor.commands.setContent(`<h1>Privacy Policy</h1><h2>1. Information Collection</h2><p>We collect personal information that you provide to us directly, such as when you create an account.</p>`);
     }
-  }, [activeTab]);
+  }, [activeTab, editor]);
 
-  const handleFormat = (prefix: string, suffix: string = "") => {
-    if (!textareaRef.current) return;
-    
-    const start = textareaRef.current.selectionStart;
-    const end = textareaRef.current.selectionEnd;
-    const selectedText = content.substring(start, end);
-    
-    // Line formatting for headings and lists
-    if (!suffix && prefix.endsWith(" ")) {
-      // Find the start of the current line
-      const lineStart = content.lastIndexOf('\n', start - 1) + 1;
-      const newContent = content.substring(0, lineStart) + prefix + content.substring(lineStart);
-      setContent(newContent);
-      
-      setTimeout(() => {
-        if (textareaRef.current) {
-          textareaRef.current.focus();
-          textareaRef.current.setSelectionRange(end + prefix.length, end + prefix.length);
-        }
-      }, 0);
-      return;
-    }
-
-    // Inline formatting for Bold, Italic, Underline
-    const newText = prefix + selectedText + suffix;
-    const newContent = content.substring(0, start) + newText + content.substring(end);
-    
-    setContent(newContent);
-    
-    setTimeout(() => {
-      if (textareaRef.current) {
-        textareaRef.current.focus();
-        if (start === end) {
-          textareaRef.current.setSelectionRange(start + prefix.length, start + prefix.length);
-        } else {
-          textareaRef.current.setSelectionRange(start, start + newText.length);
-        }
-      }
-    }, 0);
-  };
+  if (!editor) {
+    return null;
+  }
 
   return (
     <div className="flex-1 min-h-screen bg-white dark:bg-black">
@@ -122,30 +96,69 @@ export default function LegalEditorPage() {
         <div className="rounded-xl border border-gray-200 bg-white overflow-hidden shadow-sm dark:border-gray-700 dark:bg-gray-900">
           {/* Editor Toolbar */}
           <div className="flex items-center gap-4 border-b border-gray-100 px-6 py-3 bg-white dark:border-gray-700 dark:bg-gray-800 flex-wrap">
-            <button onClick={() => handleFormat("**", "**")} className="text-gray-500 hover:text-gray-900 transition-colors p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"><Bold className="h-4 w-4" /></button>
-            <button onClick={() => handleFormat("*", "*")} className="text-gray-500 hover:text-gray-900 transition-colors p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"><Italic className="h-4 w-4" /></button>
-            <button onClick={() => handleFormat("<u>", "</u>")} className="text-gray-500 hover:text-gray-900 transition-colors p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"><UnderlineIcon className="h-4 w-4" /></button>
+            <button 
+              onClick={() => editor.chain().focus().toggleBold().run()} 
+              disabled={!editor.can().chain().focus().toggleBold().run()}
+              className={`text-gray-500 hover:text-gray-900 transition-colors p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white ${editor.isActive('bold') ? 'bg-gray-100 text-gray-900 dark:bg-gray-700 dark:text-white' : ''}`}
+            >
+              <Bold className="h-4 w-4" />
+            </button>
+            <button 
+              onClick={() => editor.chain().focus().toggleItalic().run()} 
+              disabled={!editor.can().chain().focus().toggleItalic().run()}
+              className={`text-gray-500 hover:text-gray-900 transition-colors p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white ${editor.isActive('italic') ? 'bg-gray-100 text-gray-900 dark:bg-gray-700 dark:text-white' : ''}`}
+            >
+              <Italic className="h-4 w-4" />
+            </button>
+            <button 
+              onClick={() => editor.chain().focus().toggleUnderline().run()} 
+              disabled={!editor.can().chain().focus().toggleUnderline().run()}
+              className={`text-gray-500 hover:text-gray-900 transition-colors p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white ${editor.isActive('underline') ? 'bg-gray-100 text-gray-900 dark:bg-gray-700 dark:text-white' : ''}`}
+            >
+              <UnderlineIcon className="h-4 w-4" />
+            </button>
             
             <div className="w-px h-5 bg-gray-200 mx-2 dark:bg-gray-600"></div>
             
-            <button onClick={() => handleFormat("# ")} className="text-xs font-bold text-gray-500 hover:text-gray-900 transition-colors px-2 py-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">H1</button>
-            <button onClick={() => handleFormat("## ")} className="text-xs font-bold text-gray-500 hover:text-gray-900 transition-colors px-2 py-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">H2</button>
-            <button onClick={() => handleFormat("### ")} className="text-xs font-bold text-gray-500 hover:text-gray-900 transition-colors px-2 py-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">H3</button>
+            <button 
+              onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()} 
+              className={`text-xs font-bold text-gray-500 hover:text-gray-900 transition-colors px-2 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white ${editor.isActive('heading', { level: 1 }) ? 'bg-gray-100 text-gray-900 dark:bg-gray-700 dark:text-white' : ''}`}
+            >
+              H1
+            </button>
+            <button 
+              onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()} 
+              className={`text-xs font-bold text-gray-500 hover:text-gray-900 transition-colors px-2 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white ${editor.isActive('heading', { level: 2 }) ? 'bg-gray-100 text-gray-900 dark:bg-gray-700 dark:text-white' : ''}`}
+            >
+              H2
+            </button>
+            <button 
+              onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()} 
+              className={`text-xs font-bold text-gray-500 hover:text-gray-900 transition-colors px-2 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white ${editor.isActive('heading', { level: 3 }) ? 'bg-gray-100 text-gray-900 dark:bg-gray-700 dark:text-white' : ''}`}
+            >
+              H3
+            </button>
 
             <div className="w-px h-5 bg-gray-200 mx-2 dark:bg-gray-600"></div>
 
-            <button onClick={() => handleFormat("- ")} className="text-gray-500 hover:text-gray-900 transition-colors p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"><List className="h-4 w-4" /></button>
-            <button onClick={() => handleFormat("1. ")} className="text-gray-500 hover:text-gray-900 transition-colors p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"><ListOrdered className="h-4 w-4" /></button>
+            <button 
+              onClick={() => editor.chain().focus().toggleBulletList().run()} 
+              className={`text-gray-500 hover:text-gray-900 transition-colors p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white ${editor.isActive('bulletList') ? 'bg-gray-100 text-gray-900 dark:bg-gray-700 dark:text-white' : ''}`}
+            >
+              <ListIcon className="h-4 w-4" />
+            </button>
+            <button 
+              onClick={() => editor.chain().focus().toggleOrderedList().run()} 
+              className={`text-gray-500 hover:text-gray-900 transition-colors p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white ${editor.isActive('orderedList') ? 'bg-gray-100 text-gray-900 dark:bg-gray-700 dark:text-white' : ''}`}
+            >
+              <ListOrdered className="h-4 w-4" />
+            </button>
           </div>
 
-          {/* Text Area Content */}
-          <textarea
-            ref={textareaRef}
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            className="w-full min-h-[500px] resize-y p-8 text-sm outline-none text-gray-700 leading-7 bg-white dark:bg-gray-900 dark:text-gray-200"
-            style={{ fontFamily: "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto" }}
-          />
+          {/* Editor Content Box */}
+          <div className="bg-white dark:bg-gray-900">
+            <EditorContent editor={editor} />
+          </div>
         </div>
 
         {/* Action Bottom */}
@@ -156,6 +169,76 @@ export default function LegalEditorPage() {
           </button>
         </div>
       </main>
+
+      {/* Tailwind Typography replacement for ProseMirror */}
+      <style dangerouslySetInnerHTML={{__html: `
+        .ProseMirror {
+          outline: none;
+          min-height: 500px;
+          padding: 2rem;
+          color: #374151;
+          line-height: 1.75;
+          font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+        .dark .ProseMirror {
+          color: #D1D5DB;
+        }
+        .ProseMirror p.is-editor-empty:first-child::before {
+          content: attr(data-placeholder);
+          float: left;
+          color: #9CA3AF;
+          pointer-events: none;
+          height: 0;
+        }
+        .ProseMirror h1 {
+          font-size: 2.25rem;
+          font-weight: 800;
+          margin-top: 0;
+          margin-bottom: 1rem;
+          color: #111827;
+        }
+        .dark .ProseMirror h1 {
+          color: #FFFFFF;
+        }
+        .ProseMirror h2 {
+          font-size: 1.5rem;
+          font-weight: 700;
+          margin-top: 1.5rem;
+          margin-bottom: 0.75rem;
+          color: #1F2937;
+        }
+        .dark .ProseMirror h2 {
+          color: #F3F4F6;
+        }
+        .ProseMirror h3 {
+          font-size: 1.25rem;
+          font-weight: 600;
+          margin-top: 1.25rem;
+          margin-bottom: 0.5rem;
+          color: #374151;
+        }
+        .dark .ProseMirror h3 {
+          color: #E5E7EB;
+        }
+        .ProseMirror p {
+          margin-top: 0;
+          margin-bottom: 1rem;
+        }
+        .ProseMirror ul {
+          list-style-type: disc;
+          padding-left: 1.5rem;
+          margin-bottom: 1rem;
+        }
+        .ProseMirror ol {
+          list-style-type: decimal;
+          padding-left: 1.5rem;
+          margin-bottom: 1rem;
+        }
+        .ProseMirror li p {
+          margin-bottom: 0.25rem;
+          margin-top: 0.25rem;
+        }
+      `}} />
     </div>
   );
 }
