@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import Header from "@/components/layout/Header";
 import { useSearchParams } from "next/navigation";
 import { useEditor, EditorContent } from '@tiptap/react';
@@ -16,7 +16,7 @@ import {
   Save
 } from "lucide-react";
 
-export default function LegalEditorPage() {
+function LegalEditorContent() {
   const searchParams = useSearchParams();
   const initialTab = searchParams?.get("tab") === "privacy" ? "privacy" : "terms";
   const [activeTab, setActiveTab] = useState(initialTab);
@@ -240,5 +240,13 @@ export default function LegalEditorPage() {
         }
       `}} />
     </div>
+  );
+}
+
+export default function LegalEditorPage() {
+  return (
+    <Suspense fallback={<div className="flex-1 min-h-screen bg-white dark:bg-black p-8 text-center text-gray-500">Loading editor...</div>}>
+      <LegalEditorContent />
+    </Suspense>
   );
 }
