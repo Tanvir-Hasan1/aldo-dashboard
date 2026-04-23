@@ -3,8 +3,10 @@
 import React from "react";
 import Image from "next/image";
 import { Search, Bell } from "lucide-react";
+import { useAuthStore } from "@/store/useAuthStore";
 
 export default function Header({ title, subtitle }: { title?: string; subtitle?: string }) {
+  const user = useAuthStore((state) => state.user);
   return (
     <header className="sticky top-0 z-30 flex h-[72px] w-full items-center justify-between border-b border-gray-100 bg-white px-8 backdrop-blur-md dark:border-gray-800 dark:bg-black/80">
       <div>
@@ -32,9 +34,9 @@ export default function Header({ title, subtitle }: { title?: string; subtitle?:
         <div className="flex items-center gap-3">
           <div className="hidden text-right lg:block">
             <p className="text-sm font-bold text-gray-900 dark:text-white">
-              Tanvir Hasan
+              {user?.full_name || "Admin User"}
             </p>
-            <p className="text-xs font-semibold text-gray-400">Admin</p>
+            <p className="text-xs font-semibold text-gray-400 capitalize">{user?.role || "Admin"}</p>
           </div>
           <div className="relative h-10 w-10 overflow-hidden rounded-xl border border-gray-100 dark:border-gray-800">
             <Image
