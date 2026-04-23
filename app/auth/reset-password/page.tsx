@@ -22,7 +22,7 @@ export default function ResetPasswordPage() {
   };
 
   return (
-    <div className="flex min-h-screen bg-[#F8F9FA] dark:bg-[#0A0A0A]">
+    <div className="flex min-h-screen bg-[var(--color-background)] dark:bg-[#0A0A0A]">
       <title>Reset Password | Aldo Dashboard</title>
       <div className="flex w-full flex-col lg:flex-row items-center justify-center px-4">
         <div className="w-full max-w-[440px] rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
@@ -44,7 +44,7 @@ export default function ResetPasswordPage() {
                   type={showPassword ? "text" : "password"}
                   id="password"
                   placeholder="Type a strong password"
-                  className="block w-full rounded-xl border border-gray-200 py-3 px-4 text-sm transition-all focus:border-[#FF8C42] focus:ring-2 focus:ring-[#FF8C42]/20 outline-none pr-10"
+                  className="block w-full rounded-xl border border-gray-200 py-3 px-4 text-sm transition-all focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[var(--color-primary)]/20 outline-none pr-10 text-[var(--color-text-input)]"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
@@ -75,7 +75,7 @@ export default function ResetPasswordPage() {
                   type={showConfirmPassword ? "text" : "password"}
                   id="confirm-password"
                   placeholder="Re-type password"
-                  className="block w-full rounded-xl border border-gray-200 py-3 px-4 text-sm transition-all focus:border-[#FF8C42] focus:ring-2 focus:ring-[#FF8C42]/20 outline-none pr-10"
+                  className="block w-full rounded-xl border border-gray-200 py-3 px-4 text-sm transition-all focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[var(--color-primary)]/20 outline-none pr-10 text-[var(--color-text-input)]"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   required
@@ -96,7 +96,7 @@ export default function ResetPasswordPage() {
 
             <button
               type="submit"
-              className="w-full rounded-xl bg-[#FF8C42] py-3.5 text-base font-bold text-white transition-all hover:bg-[#FF8C42]/90 active:scale-[0.98]"
+              className="w-full rounded-xl bg-[var(--color-primary)] py-3.5 text-base font-bold text-white transition-all hover:bg-[var(--color-primary)]/90 active:scale-[0.98]"
             >
               Continue
             </button>

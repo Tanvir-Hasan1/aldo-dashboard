@@ -22,7 +22,7 @@ export default function TicketProfilePage({ params }: { params: { id: string } }
   // Use id 8429 to match the mockup styling and data
   
   return (
-    <div className="flex-1 pb-10 bg-[#F8F9FA] dark:bg-black">
+    <div className="flex-1 pb-10 bg-[var(--color-background)] dark:bg-black">
       <title>Ticket #8429 | Aldo</title>
       <Header />
 
@@ -39,7 +39,7 @@ export default function TicketProfilePage({ params }: { params: { id: string } }
             <p className="text-sm font-semibold text-gray-400 mt-2">Submitted 2 hours ago by Alex Rivera</p>
           </div>
           <div className="flex items-center gap-3">
-            <span className="rounded-xl bg-[#FFF6EE] px-4 py-2 text-sm font-bold text-[#FF8C42] dark:bg-orange-900/20">
+            <span className="rounded-xl bg-[var(--color-primary-light)] px-4 py-2 text-sm font-bold text-[var(--color-primary)] dark:bg-orange-900/20">
               High Priority
             </span>
             <span className="rounded-xl bg-[#ECFDF5] border border-[#D1FAE5] px-4 py-2 text-sm font-bold text-[#059669] dark:bg-emerald-900/20 dark:border-emerald-800/30">
@@ -82,7 +82,7 @@ export default function TicketProfilePage({ params }: { params: { id: string } }
                     screenshot_order_status.png <span className="text-gray-400 font-medium ml-1">(1.2 MB)</span>
                   </span>
                 </div>
-                <button className="text-sm font-bold text-[#FF8C42] hover:underline">Download</button>
+                <button className="text-sm font-bold text-[var(--color-primary)] hover:underline">Download</button>
               </div>
             </div>
 
@@ -114,7 +114,7 @@ export default function TicketProfilePage({ params }: { params: { id: string } }
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mt-6">
                 <label className="flex items-center gap-3 cursor-pointer group">
                   <div className="relative flex items-center justify-center">
-                    <input type="checkbox" className="peer h-4 w-4 appearance-none rounded border border-gray-200 bg-white checked:border-[#FF8C42] checked:bg-[#FF8C42] focus:ring-0 dark:border-gray-600 dark:bg-gray-800" />
+                    <input type="checkbox" className="peer h-4 w-4 appearance-none rounded border border-gray-200 bg-white checked:border-[var(--color-primary)] checked:bg-[var(--color-primary)] focus:ring-0 dark:border-gray-600 dark:bg-gray-800 text-[var(--color-text-input)]" />
                     <svg className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-2.5 w-2.5 text-white opacity-0 peer-checked:opacity-100 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={4}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
@@ -128,7 +128,7 @@ export default function TicketProfilePage({ params }: { params: { id: string } }
                   <button className="flex-1 sm:flex-none rounded-lg border border-gray-100 bg-white px-6 py-2.5 text-sm font-bold text-[#4B5563] shadow-sm transition-all hover:bg-gray-50 hover:border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700">
                     Mark as Resolved
                   </button>
-                  <button className="flex-1 sm:flex-none rounded-lg bg-[#FF8C42] px-6 py-2.5 text-sm font-bold text-white shadow-md shadow-[#FF8C42]/20 transition-all hover:bg-[#F27E33] active:scale-95">
+                  <button className="flex-1 sm:flex-none rounded-lg bg-[var(--color-primary)] px-6 py-2.5 text-sm font-bold text-white shadow-md shadow-[var(--color-primary)]/20 transition-all hover:bg-[var(--color-primary-hover)] active:scale-95">
                     Send Reply
                   </button>
                 </div>
@@ -142,7 +142,7 @@ export default function TicketProfilePage({ params }: { params: { id: string } }
               <h3 className="text-xs font-bold uppercase tracking-widest text-[#9CA3AF] mb-8">CUSTOMER DETAILS</h3>
               
               <div className="flex items-center gap-4 mb-8 pb-8 border-b border-gray-50 dark:border-gray-800/50">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#FFF6EE] text-[#FF8C42] dark:bg-orange-900/20">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--color-primary-light)] text-[var(--color-primary)] dark:bg-orange-900/20">
                   <User className="h-5 w-5" />
                 </div>
                 <div>

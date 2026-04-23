@@ -44,7 +44,7 @@ export default function SubscriptionPlans() {
             <div className="flex-1 space-y-8">
               <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-6">
                 <div className="space-y-3">
-                  <span className="inline-flex rounded-full bg-orange-50 px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#FF8C42] dark:bg-orange-900/20">
+                  <span className="inline-flex rounded-full bg-orange-50 px-3 py-1 text-xs font-bold uppercase tracking-wider text-[var(--color-primary)] dark:bg-orange-900/20">
                     Best Plan
                   </span>
                   <h2 className="text-4xl font-black tracking-tight text-[#1E253A] dark:text-white">Pro Plan</h2>
@@ -54,13 +54,13 @@ export default function SubscriptionPlans() {
                     <span className="text-3xl font-black">$29</span>
                     <span className="text-sm font-bold text-gray-500">/ month</span>
                   </div>
-                  <p className="mt-1 text-sm font-bold text-[#FF8C42]">or €290 / year (save 20%)</p>
+                  <p className="mt-1 text-sm font-bold text-[var(--color-primary)]">or €290 / year (save 20%)</p>
                 </div>
               </div>
 
               {/* Trial Status Banne */}
               <div className="flex items-center gap-3 rounded-xl bg-gray-50 p-4 dark:bg-gray-800">
-                <ShieldCheck className="h-5 w-5 text-[#FF8C42]" />
+                <ShieldCheck className="h-5 w-5 text-[var(--color-primary)]" />
                 <p className="text-sm text-gray-700 dark:text-gray-300">
                   Trial Status: <span className="font-bold text-gray-900 dark:text-white">7 days free trial active for new users</span>
                 </p>
@@ -70,7 +70,7 @@ export default function SubscriptionPlans() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8">
                 {features.map((feature, idx) => (
                   <div key={idx} className="flex items-center gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-[#FF8C42]" />
+                    <CheckCircle2 className="h-5 w-5 text-[var(--color-primary)]" />
                     <span className="text-sm font-semibold text-gray-600 dark:text-gray-300">{feature}</span>
                   </div>
                 ))}
@@ -98,7 +98,7 @@ export default function SubscriptionPlans() {
                 <span className="text-sm font-bold text-gray-900 dark:text-gray-100">Plan Visibility</span>
                 <button 
                   onClick={() => setIsPlanVisible(!isPlanVisible)}
-                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${isPlanVisible ? 'bg-[#FF8C42]' : 'bg-gray-300 dark:bg-gray-600'}`}
+                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${isPlanVisible ? 'bg-[var(--color-primary)]' : 'bg-gray-300 dark:bg-gray-600'}`}
                 >
                   <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${isPlanVisible ? 'translate-x-6' : 'translate-x-1'}`} />
                 </button>
@@ -114,7 +114,7 @@ export default function SubscriptionPlans() {
           {/* Create Coupon */}
           <div className="lg:col-span-4 space-y-6">
             <div className="flex items-center gap-3">
-              <div className="h-6 w-1 rounded-full bg-[#FF8C42]"></div>
+              <div className="h-6 w-1 rounded-full bg-[var(--color-primary)]"></div>
               <h2 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">Create Coupon</h2>
             </div>
             
@@ -122,36 +122,36 @@ export default function SubscriptionPlans() {
               <form className="space-y-6">
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-gray-700 dark:text-gray-300">Coupon Code</label>
-                  <input type="text" placeholder="E.G. SAVE20" className="w-full rounded-xl border border-gray-200 bg-gray-50/50 p-3.5 text-sm outline-none focus:border-[#FF8C42] focus:ring-2 focus:ring-[#FF8C42]/10 dark:border-gray-800 dark:bg-gray-800 dark:text-white uppercase" />
+                  <input type="text" placeholder="E.G. SAVE20" className="w-full rounded-xl border border-gray-200 bg-gray-50/50 p-3.5 text-sm outline-none focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[var(--color-primary)]/10 dark:border-gray-800 dark:bg-gray-800 dark: uppercase text-[var(--color-text-input)]" />
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <label className="text-sm font-bold text-gray-700 dark:text-gray-300">Discount Type</label>
-                    <select className="w-full rounded-xl border border-gray-200 bg-gray-50/50 p-3.5 text-sm font-medium text-gray-700 outline-none focus:border-[#FF8C42] focus:ring-2 focus:ring-[#FF8C42]/10 dark:border-gray-800 dark:bg-gray-800 dark:text-gray-200">
+                    <select className="w-full rounded-xl border border-gray-200 bg-gray-50/50 p-3.5 text-sm font-medium text-gray-700 outline-none focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[var(--color-primary)]/10 dark:border-gray-800 dark:bg-gray-800 dark:text-gray-200">
                       <option>Percentage (%)</option>
                       <option>Fixed Amount ($)</option>
                     </select>
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-bold text-gray-700 dark:text-gray-300">Value</label>
-                    <input type="text" placeholder="20" className="w-full rounded-xl border border-gray-200 bg-gray-50/50 p-3.5 text-sm outline-none focus:border-[#FF8C42] focus:ring-2 focus:ring-[#FF8C42]/10 dark:border-gray-800 dark:bg-gray-800 dark:text-white" />
+                    <input type="text" placeholder="20" className="w-full rounded-xl border border-gray-200 bg-gray-50/50 p-3.5 text-sm outline-none focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[var(--color-primary)]/10 dark:border-gray-800 dark:bg-gray-800 dark: text-[var(--color-text-input)]" />
                   </div>
                 </div>
 
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-gray-700 dark:text-gray-300">Expiration Date</label>
                   <div className="relative">
-                    <input type="date" className="w-full rounded-xl border border-gray-200 bg-gray-50/50 p-3.5 text-sm text-gray-500 outline-none focus:border-[#FF8C42] focus:ring-2 focus:ring-[#FF8C42]/10 dark:border-gray-800 dark:bg-gray-800 dark:text-gray-400" />
+                    <input type="date" className="w-full rounded-xl border border-gray-200 bg-gray-50/50 p-3.5 text-sm outline-none focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[var(--color-primary)]/10 dark:border-gray-800 dark:bg-gray-800 dark: text-[var(--color-text-input)]" />
                   </div>
                 </div>
 
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-gray-700 dark:text-gray-300">Usage Limit</label>
-                  <input type="number" placeholder="100" className="w-full rounded-xl border border-gray-200 bg-gray-50/50 p-3.5 text-sm outline-none focus:border-[#FF8C42] focus:ring-2 focus:ring-[#FF8C42]/10 dark:border-gray-800 dark:bg-gray-800 dark:text-white" />
+                  <input type="number" placeholder="100" className="w-full rounded-xl border border-gray-200 bg-gray-50/50 p-3.5 text-sm outline-none focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[var(--color-primary)]/10 dark:border-gray-800 dark:bg-gray-800 dark: text-[var(--color-text-input)]" />
                 </div>
 
-                <button type="button" className="w-full rounded-xl bg-[#FF8C42] p-4 text-sm font-black text-white shadow-md shadow-[#FF8C42]/20 transition hover:bg-[#e07b3a] active:scale-95 mt-4">
+                <button type="button" className="w-full rounded-xl bg-[var(--color-primary)] p-4 text-sm font-black text-white shadow-md shadow-[var(--color-primary)]/20 transition hover:bg-[#e07b3a] active:scale-95 mt-4">
                   Create Coupon Code
                 </button>
               </form>
@@ -161,7 +161,7 @@ export default function SubscriptionPlans() {
           {/* Coupon Management */}
           <div className="lg:col-span-8 space-y-6">
             <div className="flex items-center gap-3">
-              <div className="h-6 w-1 rounded-full bg-[#FF8C42]"></div>
+              <div className="h-6 w-1 rounded-full bg-[var(--color-primary)]"></div>
               <h2 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">Coupon Management</h2>
             </div>
 
@@ -218,7 +218,7 @@ export default function SubscriptionPlans() {
                   <button className="flex items-center justify-center rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-xs font-bold text-[#1E253A] hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700">
                     Previous
                   </button>
-                  <button className="flex items-center justify-center rounded-lg bg-[#FF8C42] px-3 py-1.5 text-xs font-bold text-white shadow-sm hover:bg-[#e07b3a]">
+                  <button className="flex items-center justify-center rounded-lg bg-[var(--color-primary)] px-3 py-1.5 text-xs font-bold text-white shadow-sm hover:bg-[#e07b3a]">
                     Next
                   </button>
                 </div>

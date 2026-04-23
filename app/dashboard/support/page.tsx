@@ -104,7 +104,7 @@ export default function SupportPage() {
                 onClick={() => setActiveTab(tab)}
                 className={`rounded-md px-6 py-2 text-sm font-semibold transition-all ${
                   activeTab === tab
-                    ? "bg-[#FF8C42] text-white shadow-sm"
+                    ? "bg-[var(--color-primary)] text-white shadow-sm"
                     : "text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
                 }`}
               >
@@ -121,7 +121,7 @@ export default function SupportPage() {
             <input
               type="text"
               placeholder="Search support requests..."
-              className="block w-full rounded-full border border-gray-100 bg-white py-2.5 pl-11 pr-4 text-sm shadow-sm outline-none focus:border-[#FF8C42] focus:ring-1 focus:ring-[#FF8C42] dark:border-gray-800 dark:bg-gray-900"
+              className="block w-full rounded-full border border-gray-100 bg-white py-2.5 pl-11 pr-4 text-sm shadow-sm outline-none focus:border-[var(--color-primary)] focus:ring-1 focus:ring-[var(--color-primary)] dark:border-gray-800 dark:bg-gray-900 text-[var(--color-text-input)]"
             />
           </div>
         </div>
@@ -157,7 +157,7 @@ export default function SupportPage() {
                       <span
                         className={`inline-flex rounded-full px-3 py-1 text-xs font-bold ${
                           ticket.status === "Open"
-                            ? "bg-orange-50 text-[#FF8C42] dark:bg-orange-900/20"
+                            ? "bg-orange-50 text-[var(--color-primary)] dark:bg-orange-900/20"
                             : "bg-green-50 text-green-600 dark:bg-green-900/20"
                         }`}
                       >
@@ -168,7 +168,7 @@ export default function SupportPage() {
                     <td className="px-6 py-4 text-right">
                       <Link 
                         href={`/dashboard/support/${ticket.id === "JD" ? "8429" : ticket.id}`}
-                        className="inline-block rounded-lg border border-[#FF8C42] px-4 py-1.5 text-xs font-bold text-[#FF8C42] transition-all hover:bg-[#FF8C42] hover:text-white"
+                        className="inline-block rounded-lg border border-[var(--color-primary)] px-4 py-1.5 text-xs font-bold text-[var(--color-primary)] transition-all hover:bg-[var(--color-primary)] hover:text-white"
                       >
                         View Ticket
                       </Link>

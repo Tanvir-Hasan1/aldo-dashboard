@@ -3,21 +3,45 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Mail, ArrowLeft } from "lucide-react";
+import { Mail, ArrowLeft, Loader2 } from "lucide-react";
+import axios from "axios";
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Handle reset password logic
-    console.log("Reset password for:", email);
-    router.push("/auth/verify-code");
+    setError("");
+    setIsLoading(true);
+
+    try {
+      const host = process.env.NEXT_PUBLIC_HOST || "https://risto-ai.vercel.app/";
+      const response = await axios.post(`${host}api/v1/auth/admin/forgot-password`, { email });
+
+      const data = response.data;
+      console.log("Forgot Password API Response:", data);
+
+      if (data.message === "Verification code sent for admin password reset") {
+        router.push(`/auth/verify-code?email=${encodeURIComponent(email)}`);
+      } else {
+        setError(data.message || "An error occurred");
+      }
+    } catch (err: any) {
+      if (axios.isAxiosError(err) && err.response) {
+        setError(err.response.data.message || err.response.data.detail || "An error occurred");
+      } else {
+        setError(err.message || "Network error occurred. Please try again.");
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#F8F9FA] px-4">
+    <div className="flex min-h-screen items-center justify-center bg-[var(--color-background)] px-4">
       <title>Forgot Password | Aldo Dashboard</title>
       <div className="w-full max-w-[440px] rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
         <div className="mb-8 text-center">
@@ -41,7 +65,7 @@ export default function ForgotPasswordPage() {
                 type="email"
                 id="email"
                 placeholder="Enter email"
-                className="block w-full rounded-xl border border-gray-200 py-3 pl-10 pr-3 text-sm transition-all focus:border-[#FF8C42] focus:ring-2 focus:ring-[#FF8C42]/20 outline-none"
+                className="block w-full rounded-xl border border-gray-200 py-3 pl-10 pr-3 text-sm transition-all focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[var(--color-primary)]/20 outline-none text-[var(--color-text-input)]"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -49,11 +73,14 @@ export default function ForgotPasswordPage() {
             </div>
           </div>
 
+          {error && <div className="text-sm font-medium text-red-500">{error}</div>}
+
           <button
             type="submit"
-            className="w-full rounded-xl bg-[#FF8C42] py-3.5 text-base font-bold text-white transition-all hover:bg-[#FF8C42]/90 active:scale-[0.98]"
+            disabled={isLoading}
+            className="w-full flex items-center justify-center rounded-xl bg-[var(--color-primary)] py-3.5 text-base font-bold text-white transition-all hover:bg-[var(--color-primary)]/90 active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed"
           >
-            Next
+            {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : "Next"}
           </button>
 
           <div className="text-center">

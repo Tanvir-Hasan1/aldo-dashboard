@@ -101,7 +101,7 @@ export default function SubscriptionsManagement() {
             <Download className="h-4 w-4" />
             Export Data
           </button>
-          <Link href="/dashboard/subscriptions/plan" className="flex flex-1 sm:flex-none justify-center items-center gap-2 rounded-full bg-[#FF8C42] px-4 py-2 text-sm font-bold text-white shadow-md transition-all hover:bg-[#e07b3a] active:scale-95">
+          <Link href="/dashboard/subscriptions/plan" className="flex flex-1 sm:flex-none justify-center items-center gap-2 rounded-full bg-[var(--color-primary)] px-4 py-2 text-sm font-bold text-white shadow-md transition-all hover:bg-[#e07b3a] active:scale-95">
             Our Subscriptions Plan
           </Link>
         </div>
@@ -116,7 +116,7 @@ export default function SubscriptionsManagement() {
               className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900"
             >
               <div className="flex items-center justify-between mb-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-50 text-[#FF8C42] dark:bg-orange-900/10">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-50 text-[var(--color-primary)] dark:bg-orange-900/10">
                   <stat.icon className="h-5 w-5" />
                 </div>
                 <div className={`flex items-center gap-1 rounded-full bg-green-50 px-2 py-1 text-xs font-bold text-green-600 dark:bg-green-900/10`}>
@@ -163,7 +163,7 @@ export default function SubscriptionsManagement() {
                   {revenueData.map((entry, index) => (
                       <Cell 
                         key={`cell-${index}`} 
-                        fill={index === revenueData.length - 1 ? "#FF8C42" : "#FFCDB2"} 
+                        fill={index === revenueData.length - 1 ? "var(--color-primary)" : "#FFCDB2"} 
                       />
                   ))}
                 </Bar>
@@ -184,12 +184,12 @@ export default function SubscriptionsManagement() {
               <input
                 type="text"
                 placeholder="Search by name, restaurant or email..."
-                className="block w-full rounded-full border-none bg-gray-50 py-3 pl-12 pr-4 text-sm outline-none focus:ring-2 focus:ring-[#FF8C42]/20 dark:bg-gray-800 dark:text-white"
+                className="block w-full rounded-full border-none bg-gray-50 py-3 pl-12 pr-4 text-sm outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20 dark:bg-gray-800 dark: text-[var(--color-text-input)]"
               />
             </div>
             
             <div className="flex items-center gap-1 overflow-x-auto pb-2 xl:pb-0 scrollbar-hide">
-              <button className="whitespace-nowrap rounded-full border border-orange-100 bg-white px-5 py-2 text-sm font-bold text-[#FF8C42] shadow-sm dark:border-orange-900/30 dark:bg-orange-900/10">All</button>
+              <button className="whitespace-nowrap rounded-full border border-orange-100 bg-white px-5 py-2 text-sm font-bold text-[var(--color-primary)] shadow-sm dark:border-orange-900/30 dark:bg-orange-900/10">All</button>
               <button className="whitespace-nowrap rounded-full px-5 py-2 text-sm font-semibold text-gray-500 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-gray-800">Active</button>
               <button className="whitespace-nowrap rounded-full px-5 py-2 text-sm font-semibold text-gray-500 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-gray-800">Trial</button>
               <button className="whitespace-nowrap rounded-full px-5 py-2 text-sm font-semibold text-gray-500 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-gray-800">Cancelled</button>
@@ -262,7 +262,7 @@ export default function SubscriptionsManagement() {
                     <td className="px-6 py-4">
                       <div className="flex items-center justify-end gap-3 pr-2">
                         {sub.showExtendBtn && (
-                          <button className="hidden sm:block rounded bg-orange-50 px-3 py-1 text-[11px] font-bold text-[#FF8C42] hover:bg-orange-100 dark:bg-orange-900/20">
+                          <button className="hidden sm:block rounded bg-orange-50 px-3 py-1 text-[11px] font-bold text-[var(--color-primary)] hover:bg-orange-100 dark:bg-orange-900/20">
                             Extend Trial
                           </button>
                         )}
@@ -286,7 +286,7 @@ export default function SubscriptionsManagement() {
               <button className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-100 bg-white text-gray-400 hover:bg-gray-50 hover:text-gray-900 disabled:opacity-50 dark:border-gray-800 dark:bg-gray-900">
                 <ChevronLeft className="h-4 w-4" />
               </button>
-              <button className="flex h-8 w-8 items-center justify-center rounded-full bg-[#FF8C42] text-xs font-bold text-white shadow-md shadow-[#FF8C42]/20">1</button>
+              <button className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--color-primary)] text-xs font-bold text-white shadow-md shadow-[var(--color-primary)]/20">1</button>
               <button className="flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800">2</button>
               <button className="flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800">3</button>
               <span className="text-gray-400 text-xs font-bold">...</span>

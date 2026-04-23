@@ -6,13 +6,13 @@ import { Check } from "lucide-react";
 
 export default function SuccessPage() {
   return (
-    <div className="flex min-h-screen bg-[#F8F9FA] dark:bg-[#0A0A0A]">
+    <div className="flex min-h-screen bg-[var(--color-background)] dark:bg-[#0A0A0A]">
       <title>Success | Aldo Dashboard</title>
       <div className="flex w-full flex-col lg:flex-row items-center justify-center">
         <div className="w-full max-w-[440px] rounded-2xl border border-gray-200 bg-white p-12 shadow-sm text-center">
           <div className="mb-6 flex justify-center">
-            <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#FF8C42]/10">
-              <Check className="h-10 w-10 text-[#FF8C42]" strokeWidth={3} />
+            <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[var(--color-primary)]/10">
+              <Check className="h-10 w-10 text-[var(--color-primary)]" strokeWidth={3} />
             </div>
           </div>
 
@@ -23,7 +23,7 @@ export default function SuccessPage() {
 
           <Link
             href="/auth"
-            className="block w-full rounded-xl bg-[#FF8C42] py-3.5 text-base font-bold text-white transition-all hover:bg-[#FF8C42]/90 active:scale-[0.98]"
+            className="block w-full rounded-xl bg-[var(--color-primary)] py-3.5 text-base font-bold text-white transition-all hover:bg-[var(--color-primary)]/90 active:scale-[0.98]"
           >
             Back To Login
           </Link>
@@ -35,7 +35,7 @@ export default function SuccessPage() {
 
         <Link
           href="/auth"
-          className="block w-full rounded-xl bg-[#FF8C42] py-3.5 text-base font-bold text-white transition-all hover:bg-[#FF8C42]/90 active:scale-[0.98]"
+          className="block w-full rounded-xl bg-[var(--color-primary)] py-3.5 text-base font-bold text-white transition-all hover:bg-[var(--color-primary)]/90 active:scale-[0.98]"
         >
           Back To Login
         </Link>

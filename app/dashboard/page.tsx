@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
+import { useAuthStore } from "@/store/useAuthStore";
 import Header from "@/components/layout/Header";
 import {
   Users,
@@ -82,9 +83,17 @@ const userData = [
   { name: "Trial Users", value: 32 },
 ];
 
-const COLORS = ["#FF8C42", "#4F46E5"];
+const COLORS = ["var(--color-primary)", "#4F46E5"];
 
 export default function AdminDashboard() {
+  const user = useAuthStore((state) => state.user);
+
+  useEffect(() => {
+    if (user) {
+      console.log("User data:", user);
+    }
+  }, [user]);
+
   return (
     <div className="flex-1 pb-10">
       <title>Admin Dashboard | Aldo</title>
@@ -126,7 +135,7 @@ export default function AdminDashboard() {
               <div className="flex items-center gap-3">
                  <div className="flex rounded-lg bg-gray-50 p-1 dark:bg-gray-800">
                   <button className="rounded-md px-3 py-1 text-xs font-semibold text-gray-500 transition-all hover:text-gray-900">Weekly</button>
-                  <button className="rounded-md bg-white px-3 py-1 text-xs font-bold text-[#FF8C42] shadow-sm dark:bg-gray-700">Monthly</button>
+                  <button className="rounded-md bg-white px-3 py-1 text-xs font-bold text-[var(--color-primary)] shadow-sm dark:bg-gray-700">Monthly</button>
                 </div>
                 <select className="rounded-lg border-gray-100 bg-gray-50 px-3 py-1.5 text-xs font-bold outline-none dark:border-gray-800 dark:bg-gray-800">
                   <option>2025</option>
@@ -142,7 +151,7 @@ export default function AdminDashboard() {
                     cursor={{fill: '#f8fafc'}}
                     contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
                   />
-                  <Bar dataKey="revenue" fill="#FF8C42" radius={[6, 6, 0, 0]} />
+                  <Bar dataKey="revenue" fill="var(--color-primary)" radius={[6, 6, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>

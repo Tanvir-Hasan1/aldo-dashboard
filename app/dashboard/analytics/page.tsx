@@ -90,13 +90,13 @@ const revenueData = [
 ];
 
 const subscriptionStatusData = [
-  { name: "Active", value: 6120, color: "#FF8C42" },
+  { name: "Active", value: 6120, color: "var(--color-primary)" },
   { name: "Trial", value: 1850, color: "#1F2937" },
   { name: "Cancelled", value: 950, color: "#D1D5DB" }, // lighter gray/gold
 ];
 
 const billingCycleData = [
-  { name: "Monthly", value: 75, color: "#FF8C42" },
+  { name: "Monthly", value: 75, color: "var(--color-primary)" },
   { name: "Yearly", value: 25, color: "#1F2937" },
 ];
 
@@ -113,7 +113,7 @@ export default function AnalyticsPage() {
         {/* Actions Row */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-end gap-4">
           <div className="flex rounded-full bg-white p-1 shadow-sm border border-gray-100 dark:border-gray-800 dark:bg-gray-900">
-            <button className="rounded-full bg-[#FF8C42] px-4 py-2 text-xs font-bold text-white shadow-sm">
+            <button className="rounded-full bg-[var(--color-primary)] px-4 py-2 text-xs font-bold text-white shadow-sm">
               7 Days
             </button>
             <button className="rounded-full px-4 py-2 text-xs font-semibold text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-all">
@@ -188,8 +188,8 @@ export default function AnalyticsPage() {
                 <AreaChart data={userGrowthData} margin={{ top: 10, right: 0, left: -20, bottom: 0 }}>
                   <defs>
                     <linearGradient id="colorUsers" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#FF8C42" stopOpacity={0.1} />
-                      <stop offset="95%" stopColor="#FF8C42" stopOpacity={0} />
+                      <stop offset="5%" stopColor="var(--color-primary)" stopOpacity={0.1} />
+                      <stop offset="95%" stopColor="var(--color-primary)" stopOpacity={0} />
                     </linearGradient>
                   </defs>
                   <XAxis
@@ -217,7 +217,7 @@ export default function AnalyticsPage() {
                   <Area
                     type="monotone"
                     dataKey="users"
-                    stroke="#FF8C42"
+                    stroke="var(--color-primary)"
                     strokeWidth={3}
                     fillOpacity={1}
                     fill="url(#colorUsers)"
@@ -232,7 +232,7 @@ export default function AnalyticsPage() {
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-lg font-bold text-gray-900 dark:text-white">Revenue Growth</h3>
               <div className="flex gap-1">
-                <div className="h-2 w-2 rounded-full bg-[#FF8C42]"></div>
+                <div className="h-2 w-2 rounded-full bg-[var(--color-primary)]"></div>
                 <div className="h-2 w-2 rounded-full bg-gray-200 dark:bg-gray-700"></div>
               </div>
             </div>
@@ -259,8 +259,8 @@ export default function AnalyticsPage() {
                     {revenueData.map((entry, index) => (
                       <Cell
                         key={`cell-${index}`}
-                        fill={entry.active ? "#FF8C42" : "#F1F5F9"}
-                        className="dark:fill-gray-800 dark:active:fill-[#FF8C42]"
+                        fill={entry.active ? "var(--color-primary)" : "#F1F5F9"}
+                        className="dark:fill-gray-800 dark:active:fill-[var(--color-primary)]"
                       />
                     ))}
                   </Bar>

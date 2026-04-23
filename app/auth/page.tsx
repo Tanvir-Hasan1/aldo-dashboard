@@ -4,25 +4,62 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
+import { useAuthStore } from "@/store/useAuthStore";
+import axios from "axios";
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+  const setUser = useAuthStore((state) => state.setUser);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Logging in...");
-    router.push("/dashboard");
+    setIsLoading(true);
+    setError(null);
+    
+    try {
+      const host = process.env.NEXT_PUBLIC_HOST || "https://risto-ai.vercel.app/";
+      const response = await axios.post(`${host}api/v1/auth/admin/login`, {
+        email,
+        password
+      });
+
+      const data = response.data;
+
+      // Store tokens and user info
+      if (data.tokens) {
+        localStorage.setItem("access_token", data.tokens.access_token);
+        localStorage.setItem("refresh_token", data.tokens.refresh_token);
+        // Save in cookie for Next.js server-side checks and middleware
+        document.cookie = `access_token=${data.tokens.access_token}; path=/; max-age=86400; SameSite=Lax`;
+      }
+      if (data.user) {
+        // Set user in Zustand store
+        setUser(data.user);
+      }
+
+      router.push("/dashboard");
+    } catch (err: any) {
+      if (axios.isAxiosError(err) && err.response) {
+        setError(err.response.data.message || err.response.data.detail || "Failed to login");
+      } else {
+        setError(err.message || "An error occurred during login.");
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#F8F9FA] px-4">
+    <div className="flex min-h-screen items-center justify-center bg-[var(--color-background)] px-4">
       <title>Login | Aldo Dashboard</title>
       <div className="w-full max-w-[440px] rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
         <div className="mb-8 text-center">
@@ -31,6 +68,12 @@ export default function LoginPage() {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
+          {error && (
+            <div className="rounded-xl bg-red-50 p-3 text-sm text-red-600 border border-red-100">
+              {error}
+            </div>
+          )}
+
           <div className="space-y-2">
             <label
               htmlFor="email"
@@ -46,7 +89,7 @@ export default function LoginPage() {
                 type="email"
                 id="email"
                 placeholder="Enter email"
-                className="block w-full rounded-xl border border-gray-200 py-3 pl-10 pr-3 text-sm transition-all focus:border-[#FF8C42] focus:ring-2 focus:ring-[#FF8C42]/20 outline-none"
+                className="block w-full rounded-xl border border-gray-200 py-3 pl-10 pr-3 text-sm transition-all focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[var(--color-primary)]/20 outline-none text-[var(--color-text-input)]"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -69,7 +112,7 @@ export default function LoginPage() {
                 type={showPassword ? "text" : "password"}
                 id="password"
                 placeholder="Enter password"
-                className="block w-full rounded-xl border border-gray-200 py-3 pl-10 pr-10 text-sm transition-all focus:border-[#FF8C42] focus:ring-2 focus:ring-[#FF8C42]/20 outline-none"
+                className="block w-full rounded-xl border border-gray-200 py-3 pl-10 pr-10 text-sm transition-all focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[var(--color-primary)]/20 outline-none text-[var(--color-text-input)]"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -89,7 +132,7 @@ export default function LoginPage() {
             <div className="text-right">
               <Link
                 href="/auth/forgot-password"
-                className="text-sm font-medium text-[#FF8C42] hover:underline"
+                className="text-sm font-medium text-[var(--color-primary)] hover:underline"
               >
                 Forgot Password?
               </Link>
@@ -98,9 +141,10 @@ export default function LoginPage() {
 
           <button
             type="submit"
-            className="w-full rounded-xl bg-[#FF8C42] py-3.5 text-base font-bold text-white transition-all hover:bg-[#FF8C42]/90 active:scale-[0.98]"
+            disabled={isLoading}
+            className="w-full rounded-xl bg-[var(--color-primary)] py-3.5 text-base font-bold text-white transition-all hover:bg-[var(--color-primary)]/90 active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center"
           >
-            Login
+            {isLoading ? "Logging in..." : "Login"}
           </button>
         </form>
       </div>

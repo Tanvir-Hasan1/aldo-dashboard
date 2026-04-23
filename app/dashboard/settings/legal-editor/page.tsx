@@ -163,7 +163,7 @@ function LegalEditorContent() {
 
         {/* Action Bottom */}
         <div className="flex justify-end mt-8">
-          <button className="flex items-center justify-center gap-2 rounded-xl bg-[#FF8C42] px-8 py-3 text-sm font-bold text-white shadow-md shadow-[#FF8C42]/20 transition-all hover:bg-[#F27E33] active:scale-95">
+          <button className="flex items-center justify-center gap-2 rounded-xl bg-[var(--color-primary)] px-8 py-3 text-sm font-bold text-white shadow-md shadow-[var(--color-primary)]/20 transition-all hover:bg-[var(--color-primary-hover)] active:scale-95">
             <Save className="h-4 w-4" />
             Save Changes
           </button>

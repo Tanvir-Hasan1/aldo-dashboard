@@ -15,7 +15,7 @@ import {
 
 export default function SettingsPage() {
   return (
-    <div className="flex-1 pb-10 bg-[#F8F9FA] dark:bg-black">
+    <div className="flex-1 pb-10 bg-[var(--color-background)] dark:bg-black">
       <title>Settings | Aldo</title>
       <Header
         title="Settings"
@@ -44,7 +44,7 @@ export default function SettingsPage() {
               <input 
                 type="text" 
                 defaultValue="Horizon SaaS" 
-                className="w-full rounded-xl border border-gray-200 bg-gray-50/50 px-4 py-3 text-sm font-medium text-gray-900 outline-none focus:border-[#FF8C42] focus:ring-1 focus:ring-[#FF8C42] dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+                className="w-full rounded-xl border border-gray-200 bg-gray-50/50 px-4 py-3 text-sm font-medium outline-none focus:border-[var(--color-primary)] focus:ring-1 focus:ring-[var(--color-primary)] dark:border-gray-700 dark:bg-gray-800 dark: text-[var(--color-text-input)]"
               />
             </div>
             
@@ -53,7 +53,7 @@ export default function SettingsPage() {
               <input 
                 type="text" 
                 defaultValue="support@horizon-saas.com" 
-                className="w-full rounded-xl border border-gray-200 bg-gray-50/50 px-4 py-3 text-sm font-medium text-gray-900 outline-none focus:border-[#FF8C42] focus:ring-1 focus:ring-[#FF8C42] dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+                className="w-full rounded-xl border border-gray-200 bg-gray-50/50 px-4 py-3 text-sm font-medium outline-none focus:border-[var(--color-primary)] focus:ring-1 focus:ring-[var(--color-primary)] dark:border-gray-700 dark:bg-gray-800 dark: text-[var(--color-text-input)]"
               />
             </div>
             
@@ -61,7 +61,7 @@ export default function SettingsPage() {
               <label className="text-xs font-bold text-gray-700 dark:text-gray-300">Default Language</label>
               <div className="relative">
                 <select 
-                  className="w-full appearance-none rounded-xl border border-gray-200 bg-gray-50/50 px-4 py-3 text-sm font-medium text-gray-900 outline-none focus:border-[#FF8C42] focus:ring-1 focus:ring-[#FF8C42] dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+                  className="w-full appearance-none rounded-xl border border-gray-200 bg-gray-50/50 px-4 py-3 text-sm font-medium text-gray-900 outline-none focus:border-[var(--color-primary)] focus:ring-1 focus:ring-[var(--color-primary)] dark:border-gray-700 dark:bg-gray-800 dark:text-white"
                   defaultValue="en-US"
                 >
                   <option value="en-US">English (United States)</option>
@@ -129,7 +129,7 @@ export default function SettingsPage() {
           <button className="flex items-center justify-center gap-2 rounded-xl border border-gray-200 bg-white px-6 py-3 text-sm font-bold text-gray-500 transition-all hover:bg-gray-50 hover:text-gray-900 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700">
             Discard Changes
           </button>
-          <button className="flex items-center justify-center gap-2 rounded-xl bg-[#FF8C42] px-6 py-3 text-sm font-bold text-white shadow-md shadow-[#FF8C42]/20 transition-all hover:bg-[#F27E33] active:scale-95">
+          <button className="flex items-center justify-center gap-2 rounded-xl bg-[var(--color-primary)] px-6 py-3 text-sm font-bold text-white shadow-md shadow-[var(--color-primary)]/20 transition-all hover:bg-[var(--color-primary-hover)] active:scale-95">
             <Save className="h-4 w-4" />
             Save Changes
           </button>

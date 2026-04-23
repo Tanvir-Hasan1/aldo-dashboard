@@ -105,7 +105,7 @@ export default function UsersManagement() {
             <input
               type="text"
               placeholder="Search users, restaurants..."
-              className="block w-full rounded-full border border-gray-100 bg-white py-3 pl-12 pr-4 text-sm shadow-sm outline-none focus:border-[#FF8C42] focus:ring-2 focus:ring-[#FF8C42]/10 dark:border-gray-800 dark:bg-gray-900"
+              className="block w-full rounded-full border border-gray-100 bg-white py-3 pl-12 pr-4 text-sm shadow-sm outline-none focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[var(--color-primary)]/10 dark:border-gray-800 dark:bg-gray-900 text-[var(--color-text-input)]"
             />
           </div>
           <button className="flex items-center justify-center gap-2 rounded-full border border-gray-200 bg-white px-6 py-3 text-sm font-bold text-gray-900 shadow-sm transition-all hover:bg-gray-50 active:scale-95 dark:border-gray-800 dark:bg-gray-900 dark:text-white dark:hover:bg-gray-800">
@@ -146,7 +146,7 @@ export default function UsersManagement() {
                     <td className="px-6 py-5 font-semibold text-gray-600 dark:text-gray-400">{user.restaurant}</td>
                     <td className="px-6 py-5 text-gray-500">{user.location}</td>
                     <td className="px-6 py-5">
-                      <span className="inline-flex rounded-full bg-orange-50 px-2.5 py-1 text-[10px] font-bold text-[#FF8C42] dark:bg-orange-900/10">
+                      <span className="inline-flex rounded-full bg-orange-50 px-2.5 py-1 text-[10px] font-bold text-[var(--color-primary)] dark:bg-orange-900/10">
                         {user.plan}
                       </span>
                     </td>
@@ -217,7 +217,7 @@ export default function UsersManagement() {
               <button className="flex h-9 w-9 items-center justify-center rounded-full border border-gray-100 bg-white text-gray-400 transition-all hover:bg-gray-50 hover:text-gray-900 disabled:opacity-50 dark:border-gray-800 dark:bg-gray-900">
                 <ChevronLeft className="h-5 w-5" />
               </button>
-              <button className="flex h-9 w-9 items-center justify-center rounded-full bg-[#FF8C42] text-xs font-bold text-white shadow-lg shadow-[#FF8C42]/20">1</button>
+              <button className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--color-primary)] text-xs font-bold text-white shadow-lg shadow-[var(--color-primary)]/20">1</button>
               <button className="flex h-9 w-9 items-center justify-center rounded-full text-xs font-bold text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800">2</button>
               <button className="flex h-9 w-9 items-center justify-center rounded-full text-xs font-bold text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800">3</button>
               <span className="text-gray-400 text-xs font-bold">...</span>
